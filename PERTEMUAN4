@@ -1,1 +1,83 @@
+-- Membuat database baru
+CREATE DATABASE my_website;
+USE my_website;
+
+-- Membuat tabel AS_INDIVIDU (untuk user/admin)
+CREATE TABLE AS_INDIVIDU (
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    fullname VARCHAR(50) NOT NULL,
+    address TEXT NOT NULL,
+    gender CHAR(1) NOT NULL, -- 'L' untuk laki-laki, 'P' untuk perempuan
+    position VARCHAR(50), -- Jabatan/posisi untuk admin/user
+    handPhone VARCHAR(20),
+    status CHAR(1), -- Status aktif ('A') atau lainnya
+    blocked CHAR(1) DEFAULT 'N', -- 'Y' untuk diblokir, 'N' untuk tidak diblokir
+    username VARCHAR(32) NOT NULL UNIQUE, -- Email login user/admin
+    password VARCHAR(32) NOT NULL, -- Password (MD5 hash disimpan di sini)
+    created_date DATETIME DEFAULT CURRENT_TIMESTAMP, -- Waktu penambahan pengguna
+    role ENUM('admin', 'user') DEFAULT 'user' -- Role untuk membedakan admin dan user
+);
+
+-- Membuat tabel MASYARAKAT (untuk data user tambahan)
+CREATE TABLE MASYARAKAT (
+    userID INT,
+    nama VARCHAR(50) NOT NULL,
+    tanggal_lahir DATE,
+    alamat TEXT NOT NULL,
+    jenis_kelamin ENUM('L', 'P') NOT NULL, -- 'L' untuk laki-laki, 'P' untuk perempuan
+    nomor_telepon VARCHAR(20),
+    status_keluarga VARCHAR(20), -- Kepala keluarga, istri, anak, dsb.
+    pekerjaan VARCHAR(50),
+    FOREIGN KEY (userID) REFERENCES AS_INDIVIDU(userID) -- Relasi dengan tabel AS_INDIVIDU
+);
+
+-- Membuat tabel KELUARGA (untuk data keluarga)
+CREATE TABLE KELUARGA (
+    userID INT,
+    nomor_kk VARCHAR(50) NOT NULL,
+    alamat TEXT NOT NULL,
+    FOREIGN KEY (userID) REFERENCES AS_INDIVIDU(userID) -- Relasi dengan tabel AS_INDIVIDU
+);
+
+-- Insert data admin
+INSERT INTO AS_INDIVIDU (fullname, address, gender, position, handPhone, status, blocked, username, password, role)
+VALUES 
+('Admin', 'JalanJalan666', 'L', 'Administrator', '08123456789', 'A', 'N', 'admin@example.com', MD5('adminpassword'), 'admin');
+
+-- Insert data user biasa
+INSERT INTO AS_INDIVIDU (fullname, address, gender, position, handPhone, status, blocked, username, password, role)
+VALUES 
+('kevin', 'JalanJalan666', 'P', 'User', '08129876543', 'A', 'N', 'user@example.com', MD5('userpassword'), 'user');
+
+-- Tambahkan data pengguna baru ke AS_INDIVIDU dengan userID = 3
+INSERT INTO AS_INDIVIDU (fullname, address, gender, position, handPhone, status, blocked, username, password, role)
+VALUES 
+('Contoh Pengguna', 'Jalan Contoh 789', 'L', 'User', '08123456710', 'A', 'N', 'contoh@example.com', MD5('userpassword'), 'user');
+
+
+-- Insert data masyarakat terkait user
+INSERT INTO MASYARAKAT (userID, nama, tanggal_lahir, alamat, jenis_kelamin, nomor_telepon, status_keluarga, pekerjaan)
+VALUES 
+(2, 'kevin', '1990-01-01', 'JalanJalan666', 'P', '08129876543', 'Istri', 'Pegawai Swasta');
+
+-- Insert data keluarga terkait user
+INSERT INTO KELUARGA (userID, nomor_kk, alamat)
+VALUES 
+(2, '1234567890123456', 'JalanJalan666');
+
+-- Insert data masyarakat lainnya (opsional, sebagai contoh)
+INSERT INTO MASYARAKAT (userID, nama, tanggal_lahir, alamat, jenis_kelamin, nomor_telepon, status_keluarga, pekerjaan)
+VALUES 
+(3, 'Contoh Masyarakat', '1985-05-15', 'JalanJalan666', 'L', '08123456710', 'Kepala Keluarga', 'Wiraswasta');
+
+-- Insert data keluarga tambahan (opsional)
+INSERT INTO KELUARGA (userID, nomor_kk, alamat)
+VALUES 
+(3, '1234567890987654', 'JalanJalan666');
+
+-- Tambahkan data ke tabel MASYARAKAT dengan userID = 3
+INSERT INTO MASYARAKAT (userID, nama, tanggal_lahir, alamat, jenis_kelamin, nomor_telepon, status_keluarga, pekerjaan)
+VALUES 
+(3, 'Contoh Masyarakat', '1985-05-15', 'JalanJalan666', 'L', '08123456710', 'Kepala Keluarga', 'Wiraswasta');
+
 
