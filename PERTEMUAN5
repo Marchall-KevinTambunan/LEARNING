@@ -1,1 +1,152 @@
+//Form untuk Menambah Data ke AS_INDIVIDU//
+<?php include 'db_connect.php'; ?>
+
+<form method="post" action="">
+    Fullname: <input type="text" name="fullname"><br>
+    Address: <textarea name="address"></textarea><br>
+    Gender: <select name="gender">
+        <option value="L">Laki-laki</option>
+        <option value="P">Perempuan</option>
+    </select><br>
+    Position: <input type="text" name="position"><br>
+    Handphone: <input type="text" name="handPhone"><br>
+    Username: <input type="text" name="username"><br>
+    Password: <input type="password" name="password"><br>
+    Role: <select name="role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+    </select><br>
+    <input type="submit" name="submit" value="Simpan">
+</form>
+
+<?php
+if (isset($_POST['submit'])) {
+    $fullname = $_POST['fullname'];
+    $address = $_POST['address'];
+    $gender = $_POST['gender'];
+    $position = $_POST['position'];
+    $handPhone = $_POST['handPhone'];
+    $username = $_POST['username'];
+    $password = md5($_POST['password']); 
+    $role = $_POST['role'];
+
+    $sql = "INSERT INTO AS_INDIVIDU (fullname, address, gender, position, handPhone, username, password, role)
+            VALUES ('$fullname', '$address', '$gender', '$position', '$handPhone', '$username', '$password', '$role')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data berhasil disimpan!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+?>
+
+//Tampilan untuk melihat data//
+<?php
+include 'db_connect.php';
+
+$sql = "SELECT * FROM AS_INDIVIDU";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table border='1'>
+            <tr>
+                <th>UserID</th>
+                <th>Fullname</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Position</th>
+                <th>HandPhone</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Aksi</th>
+            </tr>";
+    
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>{$row['userID']}</td>
+                <td>{$row['fullname']}</td>
+                <td>{$row['address']}</td>
+                <td>{$row['gender']}</td>
+                <td>{$row['position']}</td>
+                <td>{$row['handPhone']}</td>
+                <td>{$row['username']}</td>
+                <td>{$row['role']}</td>
+                <td>
+                    <a href='update.php?id={$row['userID']}'>Edit</a> | 
+                    <a href='delete.php?id={$row['userID']}'>Hapus</a>
+                </td>
+              </tr>";
+    }
+    echo "</table>";
+} else {
+    echo "Tidak ada data";
+}
+?>
+
+//update/menambah data//
+<?php
+include 'db_connect.php';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM AS_INDIVIDU WHERE userID=$id";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+}
+
+if (isset($_POST['update'])) {
+    $fullname = $_POST['fullname'];
+    $address = $_POST['address'];
+    $position = $_POST['position'];
+    $handPhone = $_POST['handPhone'];
+
+    $sql = "UPDATE AS_INDIVIDU SET fullname='$fullname', address='$address', position='$position', handPhone='$handPhone' WHERE userID=$id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data berhasil diperbarui!";
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
+}
+?>
+
+<form method="post" action="">
+    Fullname: <input type="text" name="fullname" value="<?php echo $row['fullname']; ?>"><br>
+    Address: <textarea name="address"><?php echo $row['address']; ?></textarea><br>
+    Position: <input type="text" name="position" value="<?php echo $row['position']; ?>"><br>
+    HandPhone: <input type="text" name="handPhone" value="<?php echo $row['handPhone']; ?>"><br>
+    <input type="submit" name="update" value="Update">
+</form>
+
+//Menghapus data//
+<?php
+include 'db_connect.php';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "DELETE FROM AS_INDIVIDU WHERE userID=$id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data berhasil dihapus!";
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+}
+?>
+
+//Koneksi database//
+<?php
+$host = "localhost";
+$username = "root";  
+$password = "";  
+$dbname = "my_website"; 
+
+$conn = new mysqli($host, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+?>
+
 
