@@ -1,12 +1,11 @@
 <?php
 include 'koneksi.php';
 
-$id = $_POST['id'];
 $nama = $_POST['nama'];
 $alamat = $_POST['alamat'];
 $umur = $_POST['umur'];
 
-$query = "UPDATE warga SET nama='$nama', alamat='$alamat', umur='$umur' WHERE id=$id";
+$query = "INSERT INTO warga (nama, alamat, umur) VALUES ('$nama', '$alamat', '$umur')";
 mysqli_query($koneksi, $query);
 
 header('Location: index.php');
