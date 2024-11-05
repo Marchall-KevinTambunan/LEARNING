@@ -1,6 +1,6 @@
 # WEBSITE DATA WARGA DESA
 
-1. Peran Pengguna:
+1. **Peran Pengguna**:
    - Admin: Mengelola data warga, keluarga, pekerjaan, kematian, dan membuat laporan.
    - Kepala Desa: Melihat laporan data yang sudah dikelola oleh admin.
    - Warga: Akses terbatas untuk melihat laporan data kematian dan laporan umum.
