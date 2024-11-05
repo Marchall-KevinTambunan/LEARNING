@@ -1,11 +1,33 @@
-WEB UNTUK MENYIMPAN INFORMASI DATA DIRI WARGA DESA.
+**WEB UNTUK MENYIMPAN INFORMASI DATA DIRI WARGA DESA.**
 
-Fitur aplikasi dari sisi admin:
-  1. Pengelolaan Data Warga: Admin dapat menambah, memperbarui, dan menghapus data warga seperti informasi pribadi, data keluarga, pekerjaan, dan kematian.
-  2. Pembuatan Laporan: Admin dapat menghasilkan laporan terkait data kematian, data masyarakat umum, serta laporan untuk kebutuhan internal desa.
-  3. Pengaturan Hak Akses: Admin mengatur hak akses pengguna lain (kepala desa dan warga) untuk memastikan keamanan dan privasi data.
-  4. Keamanan Data: Admin dapat mengelola pengaturan keamanan, seperti autentikasi dan izin akses, untuk melindungi data warga.
-  5. Pembaruan Data: Admin perlu diperbarui atau dikonfirmasi, memastikan informasi tetap up-to-date.
-  6. Dasbor Pengelolaan: Menyediakan tampilan dasbor untuk melihat ringkasan data secara cepat, kematian, pekerjaan, dll.  
+Fitur aplikasi
+  Sisi admin:
+    1. Pengelolaan Data Warga: Admin dapat menambah, memperbarui, dan menghapus data warga seperti informasi pribadi, data keluarga, pekerjaan, dan kematian.
+    2. Pembuatan Laporan: Admin dapat menghasilkan laporan terkait data kematian, data masyarakat umum, serta laporan untuk kebutuhan internal desa.
+    3. Pengaturan Hak Akses: Admin mengatur hak akses pengguna lain (kepala desa dan warga) untuk memastikan keamanan dan privasi data.
+    4. Keamanan Data: Admin dapat mengelola pengaturan keamanan, seperti autentikasi dan izin akses, untuk melindungi data warga.
+    5. Pembaruan Data: Admin perlu memperbarui atau dikonfirmasi, memastikan informasi tetap up-to-date.
+    6. Dasbor Pengelolaan: Menyediakan tampilan dasbor untuk melihat ringkasan data secara cepat, status pekerjaan.  
+
+  Sisi User:
+    1. Pengguna hanya dapat melihat informasi data diri mereka.
 
 Rencana jumlah tabel
+Untuk perencanaan tabel kami pada project ini berjumlah 6 tabel dan untuk saat ini kami baru memiliki 5 tabel, dan masih berkembang.
+
+Rencana kegiatan (dalam menyelesaikan proyek) pada minggu 
+  1. Kegiatan ke-8 (12-18 Nov 2024) 
+     melakukan revisi/perbaikan pada projek
+  2. Kegiatan ke-9 (19-25 Nov 2024) 
+     kita melakukan pengembangan project yang telah direvisi.
+  3. Kegiatan ke-10 (26 Nov -2 Des 2024)
+     kita melanjutkan progress pada pertemuan ke-9 pada penyusunan dan struktur, desain yang dibutuhkan pada website yang kita buat.
+  4. Kegiatan ke-11 (3 - 9 Des 2024)
+     melakukan testing dan evaluasi pada project yang kita buat.
+  5. Kegiatan ke-12 (10 - 16 Des 2024)
+     Final project yang telah kita buat.
+
+
+Uraikan upaya serius dari  kelompok ini agar  proyek ini dapat diselesaikan.
+Kita mengerjakan project ini dengan sungguh-sungguh, berstruktur pada setiap minggu project selalu ada progress nya sehingga kita dapat menyelesaikan hingga batas waktu yang telah ditentukan.
+
