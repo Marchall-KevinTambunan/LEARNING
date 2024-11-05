@@ -1,4 +1,11 @@
-**WEB UNTUK MENYIMPAN INFORMASI DATA DIRI WARGA DESA.**
+WEB UNTUK MENYIMPAN INFORMASI DATA DIRI WARGA DESA.
 
-#Fitur Aplikasi Dari sisi Admin
+Fitur aplikasi dari sisi admin:
+  1. Pengelolaan Data Warga: Admin dapat menambah, memperbarui, dan menghapus data warga seperti informasi pribadi, data keluarga, pekerjaan, dan kematian.
+  2. Pembuatan Laporan: Admin dapat menghasilkan laporan terkait data kematian, data masyarakat umum, serta laporan untuk kebutuhan internal desa.
+  3. Pengaturan Hak Akses: Admin mengatur hak akses pengguna lain (kepala desa dan warga) untuk memastikan keamanan dan privasi data.
+  4. Keamanan Data: Admin dapat mengelola pengaturan keamanan, seperti autentikasi dan izin akses, untuk melindungi data warga.
+  5. Pembaruan Data: Admin perlu diperbarui atau dikonfirmasi, memastikan informasi tetap up-to-date.
+  6. Dasbor Pengelolaan: Menyediakan tampilan dasbor untuk melihat ringkasan data secara cepat, kematian, pekerjaan, dll.  
 
+Rencana jumlah tabel
