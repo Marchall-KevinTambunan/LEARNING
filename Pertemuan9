@@ -1,0 +1,227 @@
+
+**Index.html**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Pendaftaran Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Halaman SELAMAT DATANG -->
+        <div id="welcome" class="page active">
+            <h1>SELAMAT DATANG</h1>
+            <p>SILAKAN KLIK TOMBOL MASUK DIBAWAH INI UNTUK MEMASUKKAN DATA DIRI</p>
+            <button onclick="goToPage('chooseData')">MASUK</button>
+        </div>
+
+        <!-- Halaman PILIH DATA -->
+        <div id="chooseData" class="page">
+            <h1>PILIH DATA YANG MAU DIISI</h1>
+            <button onclick="goToPage('familyData')">DATA KELUARGA</button>
+            <button onclick="goToPage('personalData')">DATA PRIBADI</button>
+            <button onclick="goToPage('dataList')">LIHAT DATA</button>
+        </div>
+
+        <!-- Halaman DATA KELUARGA -->
+        <div id="familyData" class="page">
+            <h1>DATA KELUARGA</h1>
+            <form id="familyForm">
+                <label>Nama Ayah: <input type="text" name="namaAyah" placeholder="Masukkan nama ayah"></label><br>
+                <label>Nama Ibu: <input type="text" name="namaIbu" placeholder="Masukkan nama ibu"></label><br>
+                <label>Jumlah Anak: <input type="number" name="jumlahAnak" placeholder="Masukkan jumlah anak"></label><br>
+                <label>Nama Anak: <input type="text" name="namaAnak" placeholder="Masukkan nama anak"></label><br>
+                <label>NIK: <input type="text" name="nik" placeholder="Masukkan NIK"></label><br>
+                <label>Status: <input type="text" name="status" placeholder="Masukkan status keluarga"></label>
+            </form>
+            <button onclick="saveData('family')">SIMPAN</button>
+        </div>
+
+        <!-- Halaman DATA PRIBADI -->
+        <div id="personalData" class="page">
+            <h1>DATA PRIBADI</h1>
+            <form id="personalForm">
+                <label>Nama: <input type="text" name="nama" placeholder="Masukkan nama"></label><br>
+                <label>Jenis Kelamin: <input type="text" name="jenisKelamin" placeholder="Masukkan jenis kelamin"></label><br>
+                <label>NIK: <input type="text" name="nik" placeholder="Masukkan NIK"></label><br>
+                <label>Status: <input type="text" name="status" placeholder="Masukkan status"></label><br>
+                <label>Pekerjaan: <input type="text" name="pekerjaan" placeholder="Masukkan pekerjaan"></label>
+            </form>
+            <button onclick="saveData('personal')">SIMPAN</button>
+        </div>
+
+        <!-- Halaman DAFTAR DATA -->
+        <div id="dataList" class="page">
+            <h1>DAFTAR DATA</h1>
+            <button onclick="viewData('family')">LIHAT DATA KELUARGA</button>
+            <button onclick="viewData('personal')">LIHAT DATA PRIBADI</button>
+            <button onclick="goToPage('chooseData')">KEMBALI</button>
+        </div>
+
+        <!-- Tampilan DATA -->
+        <div id="viewData" class="page">
+            <h1 id="viewTitle"></h1>
+            <div id="viewContent" class="data-content"></div>
+            <button onclick="goToPage('dataList')">KEMBALI</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+**Styles.css**
+/* Pengaturan Umum */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    text-align: center;
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.page {
+    display: none;
+    padding: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Gaya Form */
+form label {
+    display: block;
+    margin-bottom: 15px;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto 15px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Gaya Tombol */
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Gaya Konten Data */
+.data-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: #007bff;
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .data-content {
+        flex-direction: column;
+    }
+
+    .card {
+        width: calc(100% - 40px);
+    }
+}
+
+**Script.js**
+// Data storage
+const data = {
+    family: [],
+    personal: [],
+};
+
+// Navigasi halaman
+function goToPage(pageId) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+}
+
+// Simpan data
+function saveData(type) {
+    const form = document.getElementById(`${type}Form`);
+    const formData = new FormData(form);
+
+    const dataObject = {};
+    formData.forEach((value, key) => {
+        dataObject[key] = value;
+    });
+
+    data[type].push(dataObject); // Simpan data ke array sesuai tipe
+    alert('Data berhasil disimpan!');
+
+    form.reset(); 
+    goToPage('chooseData'); // Kembali ke halaman PILIH DATA
+}
+
+// Lihat data
+function viewData(type) {
+    const viewTitle = document.getElementById('viewTitle');
+    const viewContent = document.getElementById('viewContent');
+
+    viewTitle.textContent = type === 'family' ? 'DATA KELUARGA' : 'DATA PRIBADI';
+    viewContent.innerHTML = '';
+
+    data[type].forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        for (const [key, value] of Object.entries(item)) {
+            const p = document.createElement('p');
+            p.textContent = `${key}: ${value}`;
+            card.appendChild(p);
+        }
+
+        viewContent.appendChild(card);
+    });
+
+    goToPage('viewData');
+}
