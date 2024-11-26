@@ -1,1 +1,54 @@
+**Index.html**
+**Script.js**
+// Penyimpanan data
+const data = {
+family: [],
+personal: [],
+};
 
+// Navigasi halaman
+function goToPage(pageId) {
+const pages = document.querySelectorAll('.page');
+pages.forEach(page => page.classList.remove('active'));
+document.getElementById(pageId).classList.add('active');
+}
+
+// Menyimpan data
+function saveData(type) {
+const form = document.getElementById(`${type}Form`);
+const formData = new FormData(form);
+
+const dataObject = {};
+formData.forEach((value, key) => {
+dataObject[key] = value;
+});
+
+data[type].push(dataObject); // Simpan data ke array sesuai tipe
+    alert('Data berhasil disimpan!');
+
+    formulir.reset(); 
+    goToPage('pilihData'); // Kembali ke halaman PILIH DATA
+}
+
+// Lihat data
+fungsi viewData(tipe) {
+    const viewTitle = dokumen.getElementById('viewTitle');
+    const viewContent = dokumen.getElementById('viewContent');
+
+    viewTitle.textContent = type === 'keluarga' ? 'DATA KELUARGA' : 'DATA PRIBADI';
+    viewContent.innerHTML = '';
+
+    data[tipe].forEach(item => {
+const kartu = document.createElement('div');
+card.className = 'kartu';
+
+for (const [kunci, nilai] dari Object.entries(item)) {
+const p = document.createElement('p');
+p.kontenteks = `${kunci}: ${nilai}`;
+card.appendChild(p);
+}
+viewContent.appendChild(kartu);
+});
+goToPage('datatampilan');
+}
+ 
